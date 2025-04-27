@@ -6,8 +6,9 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        fullscreenable: false,
-        resizable: false,
+        fullscreenable: true,
+        autoHideMenuBar: true,
+        resizable: true,
         webPreferences: {
             nodeIntegration: true
         }
