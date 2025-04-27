@@ -1,11 +1,10 @@
 {
   "name": "tomatotimer",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build && electron .",
-    "build": "tsc"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
