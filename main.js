@@ -9,6 +9,7 @@ function createWindow() {
         fullscreenable: true,
         autoHideMenuBar: true,
         resizable: true,
+        exitOnClose: false,
         webPreferences: {
             nodeIntegration: true
         }
