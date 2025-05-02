@@ -1,6 +1,8 @@
 let countdown;
 let isRunning = false;
 let isReset = true;
+let timeLeft;
+let wasPaused = false;
 
 function pad(number) {
     return (number < 10 ? "0" : "") + number;
@@ -14,14 +16,17 @@ function displayTime(time) {
 }
 
 function startTimer() {
+    isRunning = true;
+    document.getElementById("startButton").textContent = "Stop";
     const minutes = parseInt(document.getElementById("minutesInput").value);
+    if(!wasPaused) {
+        timeLeft = minutes * 60;
+    }
     if (isNaN(minutes) || minutes <= 0) {
         alert("Please enter a valid number of minutes (greater than 0)");
         return;
     }
     clearInterval(countdown);
-
-    let timeLeft = minutes * 60;
 
     countdown = setInterval(() => {
         displayTime(timeLeft);
@@ -29,6 +34,7 @@ function startTimer() {
         if(timeLeft <= 0) {
             clearInterval(countdown);
             alert("Time is up!");
+            wasPaused = false;
         }else{
                 timeLeft--;
         }
@@ -36,30 +42,35 @@ function startTimer() {
     }, 1000);
 }
 
-function updateTimer() {
-    const elapsedTime = Date.now() - startTime;
-    displayTime(elapsedTime);
-}
-
 function pauseTimer(){
-    clearInterval(timerInterval);
+    document.getElementById("startButton").textContent = "Start";
+    clearInterval(countdown);
     isRunning = false;
+    wasPaused = true;
 }
 
 function resetTimer(){
-    clearInterval(timerInterval);
+    document.getElementById("startButton").textContent = "Start";
+    clearInterval(countdown);
     isRunning = false;
     displayTime(0);
     isReset = true;
+    wasPaused = false;
 }
 
 
-document.getElementById('testButton').addEventListener('click', () => {
-    if(isReset){
+document.getElementById('startButton').addEventListener('click', () => {
+    if(!isRunning){
         startTimer();
-    }else if(isRunning && !isReset){
+    }else {
         pauseTimer();
-    }else{
-        resetTimer();
     }
 });
+
+document.getElementById('restartButton').addEventListener('click', () => {
+    resetTimer();
+})
+
+document.getElementById('minutesInput').addEventListener('keypress', () => {
+    //MAKE TIMER DISPLAY TIME AS USER INPUTS NUMBERS
+})
