@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron');
+const path = require("node:path");
 
 let mainWindow;
 
@@ -10,6 +11,7 @@ function createWindow() {
         autoHideMenuBar: true,
         resizable: true,
         exitOnClose: false,
+        icon: __dirname + '/icons/TOMATO.ico',
         webPreferences: {
             nodeIntegration: true
         }
