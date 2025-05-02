@@ -78,4 +78,7 @@ document.getElementById('minutesInput').addEventListener('input', () => {
     if (!isNaN(minutes) && minutes > 0 && !isRunning) {
         displayTime(minutes * 60);
     }
+    if (isNaN(minutes)) {
+        displayTime(0);
+    }
 });
