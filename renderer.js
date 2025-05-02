@@ -1,5 +1,4 @@
-let startTime;
-let timerInterval;
+let countdown;
 let isRunning = false;
 let isReset = true;
 
@@ -7,20 +6,34 @@ function pad(number) {
     return (number < 10 ? "0" : "") + number;
 }
 
-function displayTime(milliseconds) {
-    const minutes = Math.floor(milliseconds / (60000));
-    const seconds = Math.floor((milliseconds % (60000))/1000);
-    const centiseconds = Math.floor((milliseconds % 1000)/10);
-
-    const formattedTime = `${pad(minutes)}:${pad(seconds)}:${pad(centiseconds)}`;
+function displayTime(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    const formattedTime = `${pad(minutes)}:${pad(seconds)}`;
     document.getElementById('timer').textContent = formattedTime;
 }
 
 function startTimer() {
-    startTime = Date.now();
-    timerInterval = setInterval(updateTimer, 10);
-    isRunning = true;
-    isReset = false;
+    const minutes = parseInt(document.getElementById("minutes").value);
+    if (isNaN(minutes) || minutes <= 0) {
+        alert("Please enter a valid number of minutes (greater than 0)");
+        return;
+    }
+    clearInterval(countdown);
+
+    let timeLeft = minutes * 60;
+
+    countdown = setInterval(() => {
+        displayTime(timeLeft);
+
+        if(timeLeft <= 0) {
+            clearInterval(countdown);
+            alert("Time is up!");
+        }else{
+                timeLeft--;
+        }
+
+    }, 1000);
 }
 
 function updateTimer() {
