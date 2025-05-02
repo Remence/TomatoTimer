@@ -71,6 +71,11 @@ document.getElementById('restartButton').addEventListener('click', () => {
     resetTimer();
 })
 
-document.getElementById('minutesInput').addEventListener('keypress', () => {
-    //MAKE TIMER DISPLAY TIME AS USER INPUTS NUMBERS
-})
+// Display the time as the user inputs a number for a session
+document.getElementById('minutesInput').addEventListener('input', () => {
+    const minutes = parseInt(document.getElementById("minutesInput").value);
+    // Check if the input is a valid number and >0
+    if (!isNaN(minutes) && minutes > 0 && !isRunning) {
+        displayTime(minutes * 60);
+    }
+});
