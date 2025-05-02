@@ -10,11 +10,11 @@ function displayTime(time) {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     const formattedTime = `${pad(minutes)}:${pad(seconds)}`;
-    document.getElementById('timer').textContent = formattedTime;
+    document.getElementById("timer").textContent = formattedTime;
 }
 
 function startTimer() {
-    const minutes = parseInt(document.getElementById("minutes").value);
+    const minutes = parseInt(document.getElementById("minutesInput").value);
     if (isNaN(minutes) || minutes <= 0) {
         alert("Please enter a valid number of minutes (greater than 0)");
         return;
