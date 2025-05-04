@@ -10,15 +10,23 @@
     <h1>Hello, I am TomatoTimer!</h1>
 
     <!-- TO DO: Include a button and functionality for break and perhaps a long-break every fourth session -->
-    <input type="number" id="minutesInput" placeholder="Minutes" min="0">
-    <label for="breakSelect">Break</label>
-    <select id="breakSelect">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-    </select>
-    <button id="startButton">Start</button>
-    <button id="restartButton">Restart</button>
+    <div class="input-row">
+        <div class="input-group">
+            <input type="number" id="minutesInput" placeholder="Minutes" min="0">
+        </div>
+        <div class="input-group">
+            <label for="breakSelect">Break</label>
+            <select id="breakSelect">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
+        </div>
+    </div>
+    <div class="input-row">
+        <button id="startButton">Start</button>
+        <button id="restartButton">Restart</button>
+    </div>
     <div id="timer">00:00</div>
 
     <script src="renderer.js"></script>

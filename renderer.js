@@ -63,6 +63,7 @@ function resetTimer(){
     displayTime(0);
     isReset = true;
     wasPaused = false;
+    isBreak = false;
 }
 
 
