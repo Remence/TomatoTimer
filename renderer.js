@@ -3,6 +3,7 @@ let isRunning = false;
 let isReset = true;
 let timeLeft;
 let wasPaused = false;
+let isBreak = false;
 
 function pad(number) {
     return (number < 10 ? "0" : "") + number;
@@ -19,8 +20,12 @@ function startTimer() {
     isRunning = true;
     document.getElementById("startButton").textContent = "Stop";
     const minutes = parseInt(document.getElementById("minutesInput").value);
+    const breakTime = parseInt(document.getElementById("breakSelect").value);
     if(!wasPaused) {
         timeLeft = minutes * 60;
+    }
+    if(isBreak){
+        timeLeft =  breakTime * 60;
     }
     if (isNaN(minutes) || minutes <= 0) {
         alert("Please enter a valid number of minutes (greater than 0)");
@@ -33,8 +38,10 @@ function startTimer() {
 
         if(timeLeft <= 0) {
             clearInterval(countdown);
-            alert("Time is up!");
+            alert("Break Time!");
+            document.getElementById("startButton").textContent = "Start";
             wasPaused = false;
+            isBreak = !isBreak;
         }else{
                 timeLeft--;
         }
