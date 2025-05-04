@@ -42,13 +42,15 @@ function startTimer() {
 
         if(timeLeft <= 0) {
             clearInterval(countdown);
+            const audio = new Audio('audios/timerdonesfx.mp3');
+            audio.play();
             if(isBreak){
-                alert("Get back to work like a good boy");
+                //alert("Get back to work like a good boy");
                 document.getElementById("timerLabel").textContent = "You are now working";
                 const minutes = parseInt(document.getElementById("minutesInput").value);
                 displayTime(minutes * 60);
             }else{
-                alert("Break Time!");
+                //alert("Break Time!");
                 document.getElementById("timerLabel").textContent = "You are now on break";
                 const breakTime = parseInt(document.getElementById("breakSelect").value);
                 displayTime(breakTime * 60);
