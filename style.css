@@ -61,11 +61,16 @@ label {
     display: block;
     margin-top: 10px;
     margin-bottom: 5px;
-    margin-left: 40px;
+    margin-left: 25px;
     font-size: 1em;
     font-weight: bold;
     color: #d84315;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#timerLabel {
+    margin-bottom: -30px;
+    margin-right: 30px;
 }
 
 button {

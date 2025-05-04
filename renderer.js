@@ -20,11 +20,13 @@ function startTimer() {
     isRunning = true;
     document.getElementById("startButton").textContent = "Stop";
     const minutes = parseInt(document.getElementById("minutesInput").value);
+    //console.log("minutes inputted: " +minutes); //DEBUGGING
     const breakTime = parseInt(document.getElementById("breakSelect").value);
+    //console.log("break inputted: " +breakTime); //DEBUGGING
     if(!wasPaused) {
         timeLeft = minutes * 60;
     }
-    if(isBreak){
+    if(isBreak && !wasPaused) {
         timeLeft =  breakTime * 60;
     }
     if (isNaN(minutes) || minutes <= 0) {
@@ -33,15 +35,28 @@ function startTimer() {
     }
     clearInterval(countdown);
 
+    //console.log("timeLeft: "+timeLeft); //DEBUGGING
+
     countdown = setInterval(() => {
         displayTime(timeLeft);
 
         if(timeLeft <= 0) {
             clearInterval(countdown);
-            alert("Break Time!");
+            if(isBreak){
+                alert("Get back to work like a good boy");
+                document.getElementById("timerLabel").textContent = "You are now working";
+                const minutes = parseInt(document.getElementById("minutesInput").value);
+                displayTime(minutes * 60);
+            }else{
+                alert("Break Time!");
+                document.getElementById("timerLabel").textContent = "You are now on break";
+                const breakTime = parseInt(document.getElementById("breakSelect").value);
+                displayTime(breakTime * 60);
+            }
             document.getElementById("startButton").textContent = "Start";
             wasPaused = false;
             isBreak = !isBreak;
+            isRunning = false;
         }else{
                 timeLeft--;
         }
@@ -60,10 +75,15 @@ function resetTimer(){
     document.getElementById("startButton").textContent = "Start";
     clearInterval(countdown);
     isRunning = false;
-    displayTime(0);
     isReset = true;
     wasPaused = false;
-    isBreak = false;
+    if(isBreak){
+        const breakTime = parseInt(document.getElementById("breakSelect").value);
+        displayTime(breakTime * 60);
+    }else{
+        const minutes = parseInt(document.getElementById("minutesInput").value);
+        displayTime(minutes * 60);
+    }
 }
 
 
@@ -90,3 +110,8 @@ document.getElementById('minutesInput').addEventListener('input', () => {
         displayTime(0);
     }
 });
+
+document.getElementById('breakSelect').addEventListener('click', () => {
+    const displayBreakTime = parseInt(document.getElementById("breakSelect").value);
+    displayTime(displayBreakTime * 60);
+})
